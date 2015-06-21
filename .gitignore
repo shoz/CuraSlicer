@@ -1,3 +1,7 @@
 *.stl
 *.pyc
 .DS_Store
+bin/
+lib/
+include/
+.Python
