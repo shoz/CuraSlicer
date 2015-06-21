@@ -8,32 +8,24 @@ import sys
 
 def commandlineProgressCallback(progress):
     if progress >= 0:
-        print 'Preparing: %d%%' % (progress * 100)
+        pass
+        #print 'Preparing: %d%%' % (progress * 100)
 
-prof = sys.argv[1]
-stl = sys.argv[2]
-output = sys.argv[3]
-
-def main():
-    profile.loadProfile(prof)
+def slicing(prof_filename, stl_filename, output_filename):
+    profile.loadProfile(prof_filename)
     scene = objectScene.Scene()
     scene.updateMachineDimensions()
     engine = sliceEngine.Engine(commandlineProgressCallback)
-    for m in meshLoader.loadMeshes(stl):
-        print m
+    for m in meshLoader.loadMeshes(stl_filename):
         scene.add(m)
     engine.runEngine(scene)
     engine.wait()
-    with open(output, "wb") as f:
+    with open(output_filename, "wb") as f:
         gcode = engine.getResult().getGCode()
-        print len(gcode)
         while True:
             data = gcode.read()
             if len(data) == 0:
                 break
             f.write(data)
-    print 'GCode file saved : %s' % output
+    print 'GCode file saved : %s' % output_filename
     engine.cleanup()
-
-if __name__ == '__main__':
-    main()

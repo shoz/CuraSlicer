@@ -604,7 +604,6 @@ class Engine(object):
 			settings['wipeTowerSize'] = int(math.sqrt(profile.getProfileSettingFloat('wipe_tower_volume') * 1000 * 1000 * 1000 / settings['layerThickness']))
 		if profile.getProfileSetting('ooze_shield') == 'True':
 			settings['enableOozeShield'] = 1
-                print settings
 		return settings
 
 	def _runEngineProcess(self, cmdList):
