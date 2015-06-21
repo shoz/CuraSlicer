@@ -4,17 +4,18 @@ from CuraSlicer import profile
 from CuraSlicer import sliceEngine
 from CuraSlicer import objectScene
 from CuraSlicer import meshLoader
+import sys
 
 def commandlineProgressCallback(progress):
     if progress >= 0:
         print 'Preparing: %d%%' % (progress * 100)
 
-prof = sys.argv[0]
-stl = sys.argv[1]
-output = sys.argv[2]
+prof = sys.argv[1]
+stl = sys.argv[2]
+output = sys.argv[3]
 
 def main():
-    profile.loadPreferences(prof)
+    profile.loadProfile(prof)
     scene = objectScene.Scene()
     scene.updateMachineDimensions()
     engine = sliceEngine.Engine(commandlineProgressCallback)
