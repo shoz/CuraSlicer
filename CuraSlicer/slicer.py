@@ -9,7 +9,6 @@ import sys
 def commandlineProgressCallback(progress):
     if progress >= 0:
         pass
-        #print 'Preparing: %d%%' % (progress * 100)
 
 def slicing(prof_filename, stl_filename, output_filename):
     profile.loadProfile(prof_filename)
@@ -21,11 +20,15 @@ def slicing(prof_filename, stl_filename, output_filename):
     engine.runEngine(scene)
     engine.wait()
     with open(output_filename, "wb") as f:
-        gcode = engine.getResult().getGCode()
+        result = engine.getResult()
+        gcode = result.getGCode()
+        printtime = result.getPrintTime()
         while True:
             data = gcode.read()
             if len(data) == 0:
                 break
             f.write(data)
     print 'GCode file saved : %s' % output_filename
+    print 'Printtime', printtime
     engine.cleanup()
+    return printtime

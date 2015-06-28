@@ -114,6 +114,9 @@ class EngineResult(object):
 		self._gcodeData = BigDataStorage()
 		self._gcodeData.write(gcode)
 		self._replaceInfo = {}
+        
+        def getPrintTime(self):
+                return self._printTimeSeconds
 
 	def addLog(self, line):
 		self._engineLog.append(line)
