@@ -10,7 +10,10 @@ def commandlineProgressCallback(progress):
     if progress >= 0:
         pass
 
-def slicing(prof_filename, stl_filename, output_filename):
+def slicing(pref_filename, prof_filename, stl_filename, output_filename):
+    profile.loadPreferences(pref_filename)
+    profile.checkAndUpdateMachineName()
+    print profile.getMachineSetting('machine_name')
     profile.loadProfile(prof_filename)
     scene = objectScene.Scene()
     scene.updateMachineDimensions()
